@@ -1,0 +1,30 @@
+\chapter{A Note on Notation}
+
+It is my firm belief that every text making heavy use of mathematics owes to its readers a glossary of terms and notation, \textit{especially} where that notation is unusual (or where multiple conventions currently coexist).
+Whether this should be placed in the front matter or the end matter, and whether the note takes the form of a descriptive dictionary, a succinct table, some of both, or something else entirely, is up to the writer.
+
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{ l | L }
+        \hline
+        Notation    & Description   \\
+        \hline
+        $\varphi$               & A generic flow variable, assumed $\varphi(\vec{x},t)$ \\
+        $\filter[g]{\varphi}$   & Spatial filter of variable $\varphi$ with respect to the kernel $g$  \\
+        $\resolved{\varphi}$    & Resolved part of variable $\varphi$                   \\
+        $\subfilter{\varphi}$   & Subfilter part of variable $\varphi$                  \\
+        $I_i$                   & Indicator function of partition $i$                   \\
+        $\resolved[i]{\varphi}$ & Resolved part of variable $\varphi$ in partition $i$  \\
+        $\subfilter[i]{\varphi}$& Subfilter part of variable $\varphi$ in partition $i$ \\
+        $s(a,b)$                & Generalized centred second moment of variables $a,b$  \\
+        $a$                     & A scalar                                              \\
+        $\vec{a}$               & A vector (components $a_\mu$)                         \\
+        $\tensor{a}$            & A tensor (components $a_{\mu\nu}$)                    \\
+        $\ident[d]$             & $d$-dimensional identity tensor                       \\
+        $\mathbb{R}$            & The real numbers                                      \\
+        $\in$                   & Set inclusion, i.e. $a \in S$ means ``$a$ is a member of the set $S$''    \\
+        $\mathcal{O}$           & ``Big Oh'' asymptotic order notation                  \\
+        \hline
+    \end{tabularx}
+    %\label{tab:my_label}
+\end{table}

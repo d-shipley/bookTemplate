@@ -1,0 +1,112 @@
+%%% MATHS ENV. STUFF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PACKAGES
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm} % for theorem environments
+\usepackage{amsfonts}   % specifically for blackboard bold
+\usepackage{physics}    % package full of pre-defined physics notation, e.g. \abs and \norm for absolute value and norm, \vdot for vector dot product, \dv{}{} for derivatives, and \bra \ket \braket etc.
+\usepackage{cancel} % for nice cancelling out of terms in equations
+
+%%% COMMANDS
+%% Note: some of these commands require the ifthen and/or suffix packages
+% set {...}
+\newcommand{\set}[1]{ \ensuremath{ \left\{ #1 \right\} } }
+% ``Big Oh''
+\newcommand{\bigOh}[1]{ \ensuremath{ \mathcal{O}\left( #1 \right) } }
+% vector
+\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{\mathbf{#1}}}}
+% vector \ell
+\newcommand{\vecEll}{\ensuremath{\boldsymbol\ell}}
+% unit vector
+\newcommand{\unit}[1]{\ensuremath{\hat{\vec{#1}}}}
+% nice version of measure dx for integrals
+\newcommand{\diff}[2][]{%
+    \ifthenelse{ \isempty{#1} }
+        {\ensuremath{\operatorname{d}\!{#2}}}
+        {\ensuremath{\operatorname{d}^{#1}\!{#2}}}
+}
+% horizontal divergence
+\newcommand{\divH}[1]{\ensuremath{\boldsymbol{\nabla}_\text{H}\mathbin{\vdot} #1}}
+% tensor
+\newcommand{\tensor}[1]{\ensuremath{\boldsymbol{\mathsf{#1}}}}
+% tensor parts
+\newcommand{\iso}{\ensuremath{\tensor{iso}}}
+\newcommand{\dev}{\ensuremath{\tensor{dev}}}
+\newcommand{\symm}{\ensuremath{\tensor{symm}}}
+\newcommand{\asymm}{\ensuremath{\tensor{asymm}}}
+% double-colon contraction notation
+\newcommand{\contract}{\ensuremath{\mathbin{\boldsymbol{:}}}}
+% trace
+\renewcommand{\tr}{\ensuremath{\tensor{tr}}}
+% tensor identity
+\newcommand{\ident}[1][]{%
+    \ifthenelse{ \isempty{#1} }
+        {\ensuremath{\tensor{I}}}
+        {\ensuremath{\tensor{I}}_{#1}}
+}
+% transpose
+\newcommand*{\trans}{\ensuremath{^{\mathsf{T}}}}
+% big-D material derivative
+\newcommand{\Dv}[2]{\ensuremath{\frac{\operatorname{D}\!{#1}}{\operatorname{D}\!{#2}}}}
+\WithSuffix\newcommand\Dv*[2]{\ensuremath{\flatfrac{\operatorname{D}\!{#1}}{\operatorname{D}\!{#2}}}}
+% multi-fluid material derivative
+\newcommand{\DvMF}[3]{\ensuremath{\frac{\operatorname{D}_{#1}\!{#2}}{\operatorname{D}\!{#3}}}}
+\WithSuffix\newcommand\DvMF*[3]{\ensuremath{\flatfrac{\operatorname{D}_{#1}\!{#2}}{\operatorname{D}\!{#3}}}}
+% Laplacian and divergence commands consistent with \grad
+\renewcommand{\laplacian}{\grad^2}
+\newcommand{\laplaciantilde}{\widetilde{\grad}^2}
+\newcommand{\laplacianhat}{\widehat{\grad}^2}
+\newcommand{\divtilde}[1]{\widetilde{\grad}\mathbin{\vdot}{#1}}
+\newcommand{\divhat}[1]{\widehat{\grad}\mathbin{\vdot}{#1}}
+% nice filtering operator
+\newcommand{\filter}[2][]{%
+    \ifthenelse{ \isempty{#1} }
+        {\ensuremath{ \left\langle {#2} \right\rangle }}
+        {\ensuremath{ \left\langle {#2} \right\rangle_{#1} }}
+}
+% nice Reynolds averaging operator
+\newcommand{\reynolds}[1]{%
+        {\ensuremath{ \left\langle {#1} \right\rangle_{\mathrm{R}} }}
+}
+% resolved and subfilter parts
+\newcommand{\resolved}[2][]{%
+    \ifthenelse{ \isempty{#1} }
+        {\ensuremath{ {#2}^\mathrm{r} }}
+        {\ensuremath{ {#2}_{#1}^\mathrm{r} }}
+}
+\newcommand{\subfilter}[2][]{%
+    \ifthenelse{ \isempty{#1} }
+        {\ensuremath{ {#2}^\mathrm{s} }}
+        {\ensuremath{ {#2}_{#1}^\mathrm{s} }}
+}
+\newcommand{\favreResolved}[2][]{%
+    \ifthenelse{ \isempty{#1} }
+        {\ensuremath{ \widetilde{#2}^\mathrm{r} }}
+        {\ensuremath{ \widetilde{#2}_{#1}^\mathrm{r} }}
+}
+\newcommand{\favreSubfilter}[2][]{%
+    \ifthenelse{ \isempty{#1} }
+        {\ensuremath{ \widetilde{#2}^\mathrm{r} }}
+        {\ensuremath{ \widetilde{#2}_{#1}^\mathrm{r} }}
+}
+% dimensionless groups for fluid dynamics
+\renewcommand{\Re}{\ensuremath{\operatorname{Re}}}  % Reynolds number
+\renewcommand{\Pr}{\ensuremath{\operatorname{Pr}}}  % Prandtl number
+\newcommand{\Ra}{\ensuremath{\operatorname{Ra}}}    % Rayleigh number
+\newcommand{\Nu}{\ensuremath{\operatorname{Nu}}}    % Nusselt number
+\newcommand{\Co}{\ensuremath{\operatorname{Co}}}    % Courant number
+\newcommand{\Fr}{\ensuremath{\operatorname{Fr}}}    % Froude number
+\newcommand{\Ro}{\ensuremath{\operatorname{Ro}}}    % Rossby number
+
+%%% THEOREM, REMARK, ASSUMPTION ETC. ENVIRONMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+\newtheorem*{conjecture}{Conjecture}
+\theoremstyle{plain}
+\newtheorem*{aside}{Aside}
+
+%%% MISC. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% allow display equation environments to break over page breaks
+\allowdisplaybreaks

@@ -1,0 +1,83 @@
+\documentclass[
+    12pt,
+    twoside
+]{book}
+
+%\includeonly{chapters/aSecondChapter} % use this command when you only want to compile a small part of the document to check revisions on that file only
+
+\input{dansBookMacro.tex}
+
+\graphicspath{ {book/images/} }
+\addbibresource{book/miniBib.bib}
+
+%%% VERSION CONTROL %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[mark,local]{gitinfo2}
+\renewcommand{\gitMark}{
+    %This version: \gitBranch\,@\,\gitAbbrevHash{} \textbullet{} \gitAuthorDate
+    This version: gitBranch\,@\,gitHash \textbullet{} D.~Shipley \textbullet{} 22--09--1401
+}
+% you can change this to say whatever you like; unfortunately the gitinfo2 package doesn't really work with Overleaf, so if you're using Overleaf and want git-related versioning in the watermark, you'll have to either type the commit IDs etc. in manually, or add the gitHeadInfo.gin file (generated from some local copy of the git repo) into your Overleaf document tree and use the "local" option when loading gitinfo2
+% remove [mark] from the package inclusion statement if you don't want the watermark to appear
+
+%%% TEXT TO ONLY APPEAR IN DRAFTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setboolean{draft}{true}    % set to false if you don't want annotations/to-do notes to appear
+
+%%% NONSENSE TEXT FOR THIS MWE ONLY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{blindtext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEGIN MAIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% front matter
+\frontmatter
+\pagestyle{frontAndBack}
+
+\include{book/frontMatter/titlePage}
+
+\include{book/frontMatter/versionControl}
+
+\include{book/frontMatter/dedication}
+
+\renewcommand*{\justifyheading}{\centering} % centred headings for this bit
+\include{book/frontMatter/declaration}
+
+\include{book/frontMatter/acknowledgements}
+
+\include{book/frontMatter/abstract}
+
+\renewcommand*{\justifyheading}{\raggedright} % back to left-aligned ragged-right headings
+
+\include{book/frontMatter/figures}
+
+\include{book/frontMatter/tables}
+
+\include{book/frontMatter/notation}
+
+\include{book/frontMatter/contents}
+
+\include{book/frontMatter/epigraph}
+
+% main chapters
+\mainmatter
+\pagestyle{main}
+
+\include{book/chapters/overview}
+
+\include{book/chapters/aSecondChapter}
+
+% appendices
+\begin{appendices}
+    \renewcommand{\chaptername}{Appendix}
+    \include{book/chapters/appendix}
+\end{appendices}
+
+% back matter
+\backmatter
+\setcounter{chapter}{-1} % reset chapter counter so number doesn't appear in header
+\pagestyle{frontAndBack}
+\printbibliography[heading=bibintoc,title={Bibliography\label{bibliography}}]
+
+\end{document}

@@ -1,0 +1,190 @@
+% additional latex packages to use
+\usepackage{suffix}     % allows to add suffixes when defining commands
+\usepackage{xifthen}    % for defining commands with optional arguments in a less opaque way
+
+%%% GEOMETRY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[a4paper, inner=35mm, outer=25mm, top=25mm, bottom=25mm]{geometry}
+\usepackage{pdflscape}  % for rotating pages in the PDF so you don't have to crane your neck to read them
+
+%%% TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{epigraph}   % for ``epigraphs'', i.e. rubrics at the start of chapters
+\usepackage{csquotes}   % for fancy display-style quotes
+\usepackage{xcolor}     % for changing colour of text, lines etc.
+\usepackage{enumitem}   % allows for indented paragraphs within list env.
+\setlist{listparindent=\parindent,parsep=0pt}
+\usepackage{multicol}   % allows for multiple-columns within list environments
+
+%%% GENERAL FLOATS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{afterpage}
+
+%%% TABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[flushleft]{threeparttable}  % allows for notes at end of tables
+\usepackage{tabularx}   % nice typesetting of tables, including line breaks
+    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+%%% GRAPHICS & FIGURES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{caption}
+\usepackage{subcaption} % allows subfigures
+\captionsetup{width=.9\textwidth,font=small,labelfont=small}
+\captionsetup[subfigure]{justification=justified,singlelinecheck=false}
+
+%%% CHAPTER & TOC SETUP %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tocbibind}  % for lists in TOC
+\usepackage[toc,page]{appendix} % for customizable appendices
+
+\newcounter{lotdepth}   
+\setcounter{lotdepth}{3}    % how deep does the list of tables go?
+
+\newcounter{lofdepth}
+\setcounter{lofdepth}{3}    % how deep does the list of figures go?
+
+\usepackage{titlesec}
+\usepackage{sectsty}    % to change format of all section and chapter headings
+
+\newcommand*{\justifyheading}{\raggedright}
+
+\titleformat    % custom chapter title format
+{\chapter} % command
+[display] % shape
+{\sffamily\bfseries\Huge\justifyheading} % format
+{\chaptertitlename \ \thechapter} % label
+{0.5ex} % sep
+{
+    \LARGE
+} % before-code
+%[] % after-code
+
+\allsectionsfont{\sffamily} % make all headings sans-serif
+
+%%% PAGE SETUP; HEADER & FOOTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}   % allows fancy formatting of headers & footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead{}    % clear all header fields
+\fancyfoot{}    % clear all footer fields
+\fancyhead[LE]{\footnotesize\thepage}
+\fancyhead[CE]{\footnotesize\selectfont\itshape\nouppercase{\ifnum\value{chapter}>0 \thechapter.~\fi\leftmark}}
+\fancyhead[CO]{\footnotesize\selectfont\itshape\nouppercase{\ifnum\value{chapter}>0 \thechapter.~\fi\leftmark}}
+\fancyhead[RO]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0pt}      % Line at the header invisible
+\renewcommand{\footrulewidth}{0pt}      % Line at the footer invisible
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\fancypagestyle{plain}{ % used for e.g. chapter title pages
+    \fancyhf{}
+    \fancyhead{}    % clear all header fields
+    \fancyfoot{}    % clear all footer fields
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}  % Line at the header invisible
+    \renewcommand{\footrulewidth}{0pt}  % Line at the footer invisible
+}
+
+\fancypagestyle{frontAndBack}{ % for front and back matter
+    \fancyhf{}
+    \fancyhead{}    % clear all header fields
+    \fancyfoot{}    % clear all footer fields
+    \fancyhead[LE]{\footnotesize\thepage}
+    \fancyhead[CE]{\footnotesize\selectfont\itshape\nouppercase{\ifnum\value{chapter}>0 \thechapter.~\fi\leftmark}}
+    \fancyhead[CO]{\footnotesize\selectfont\itshape\nouppercase{\ifnum\value{chapter}>0 \thechapter.~\fi\leftmark}}
+    \fancyhead[RO]{\footnotesize\thepage}
+    \renewcommand{\headrulewidth}{0pt}      % Line at the header invisible
+    \renewcommand{\footrulewidth}{0pt}      % Line at the footer invisible
+}
+
+\fancypagestyle{main}{ % for main matter (and appendices)
+    \fancyhf{}
+    \fancyhead{}    % clear all header fields
+    \fancyfoot{}    % clear all footer fields
+    \fancyhead[LE]{\footnotesize\thepage}
+    \fancyhead[CE]{\footnotesize\selectfont\itshape\nouppercase{\ifnum\value{chapter}>0 \thechapter.~\fi\leftmark}}
+    \fancyhead[CO]{\footnotesize\selectfont\itshape\nouppercase{\ifnum\value{chapter}>0 \thechapter.~\fi\leftmark}}
+    \fancyhead[RO]{\footnotesize\thepage}
+    \renewcommand{\headrulewidth}{0pt}      % Line at the header invisible
+    \renewcommand{\footrulewidth}{0pt}      % Line at the footer invisible
+}
+
+%%% LINE SPACING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+\setstretch{1.25}
+
+%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+    backref=true, 
+    backend=biber, 
+    bibencoding=utf8, 
+    style=authoryear-comp, 
+    maxcitenames=2, 
+    uniquelist=false, 
+    sorting=nyt,
+    url=false,
+    eprint=false,
+    isbn=false,
+    giveninits=true,
+    uniquename=init
+]{biblatex} % uniquelist=false means e.g. Siebesma et al. (2004) and Siebesma et
+% al. (2007) do not have unique cite keys despite having different author lists;
+% backref adds ref. in bib to page(s) cited in text
+\renewbibmacro{in:}{
+    \ifentrytype{article}{}{
+        \printtext{\bibstring{in}\intitlepunct}
+    }
+} % don't print "in" for articles
+\renewcommand*{\bibfont}{\small}
+
+\AtEveryBibitem{
+    \clearfield{day}
+    \clearfield{month}
+}   % stop superfluous fields from appearing
+
+\DefineBibliographyStrings{english}{%
+  backrefpage = {cit. on p.},% originally "cited on page"
+  backrefpages = {cit. on pp.},% originally "cited on pages"
+}
+
+%%% REVIEW & EDITING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newboolean{draft}
+\setboolean{draft}{true} % set to false in main doc preamble if you don't want annotations/to-do notes to appear
+\usepackage{ulem} % required for strikethrough text
+\normalem % use normal italics for emphasis rather than underline
+
+% Display with annotation if draft == True; without annotation if False
+\newcommand{\add}[1]{%
+    \ifthenelse{ \boolean{draft} }%
+    {\textcolor{blue}{#1}}%
+    {\unskip#1}%
+}
+\newcommand{\delete}[1]{%
+    \ifthenelse{ \boolean{draft} }%
+    {\textcolor{red}{\textit{\sout{#1}}}}%
+    {\unskip}%
+}
+\newcommand{\edit}[2]{%
+    \ifthenelse{ \boolean{draft} }%
+    {\textcolor{red}{\textit{\sout{#1}}} \textcolor{blue}{#2}}%
+    {\unskip#2}%
+}
+\newcommand{\note}[1]{%
+    \ifthenelse{ \boolean{draft} }%
+    {\textcolor{red}{\textbf{#1}}}%
+    {\unskip}%
+}
+\newcommand{\todonote}[1]{%
+    \ifthenelse{ \boolean{draft} }%
+    {\textcolor{red}{\textbf{[To-do: #1]}}}%
+    {\unskip}%
+}
+
+%%% MATHEMATICS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{dansMathsSetup}
+
+%%% REFERENCES, URLS & HYPERLINKING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}   % everyone says to include hyperref last...
+\hypersetup{
+    colorlinks=false
+}   % colour links looked pretty horrible...
+\usepackage{xurl} % for nice line-breaks in URLs
+\usepackage[capitalise,noabbrev]{cleveref}   % nice automatic typesetting of e.g. theorem, chapter etc. references
+\AtBeginEnvironment{appendices}{\crefalias{chapter}{appendix}} % change chapter to section if you want within-chapter appendices
