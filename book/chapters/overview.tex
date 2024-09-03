@@ -49,9 +49,12 @@ Most notable is probably my custom setup for captions, which makes caption text 
 
 It is also worth mentioning the \verb!pdflscape! package, which allows for pages to be rotated within the output PDF.
 This not specific to tables/figures, but I have found it useful for rotating wide tables/figures (to avoid the need to crane one's neck when reading the PDF version of your thesis!).
+Note that landscape figures/tables may require a change to the caption width.
+This may be achieved by adding \verb!\captionsetup{width=WIDTH}! inside your \texttt{figure} or \texttt{table} environment, where \verb!WIDTH! is the desired caption width.
+I have found that \verb!1.5\textwidth! works well for landscape figures.
 
 Example tables and figures follow to demonstrate my setup.
-Note that this setup is easily customizable in the \verb!TABLES! and \verb!GRAPHICS & FIGURES! sections of \verb!dansBookMacro!.
+This setup is easily customizable in the \verb!TABLES! and \verb!GRAPHICS & FIGURES! sections of \verb!dansBookMacro!.
 
 \begin{center}
 \begin{table}[t!hb]
@@ -76,7 +79,7 @@ Note that this setup is easily customizable in the \verb!TABLES! and \verb!GRAPH
     \label{tab:solverDetails}
 \end{table}
 \end{center}
-\begin{figure}[t!hb]
+\begin{figure}[htb]
     \centering
     \begin{subfigure}{0.49\textwidth}
         \caption{$\Ra \simeq 10^8$}
@@ -103,6 +106,7 @@ Note that this setup is easily customizable in the \verb!TABLES! and \verb!GRAPH
 \clearpage% Flush earlier floats (otherwise order might not be correct)
 \begin{landscape}% Landscape page
     \begin{figure}[t!hb]
+        \captionsetup{width=1.5\textwidth}
         \centering
         \begin{subfigure}[t]{\linewidth}
             \caption{Buoyancy, $b / \Delta B$}
@@ -316,7 +320,7 @@ In addition to defining math-mode commands, \texttt{dansMathsSetup} includes def
 Finally, the \verb!\allowdisplaybreaks! command allows display-mode mathematics to break over a page break --- exceptionally useful if you don't want weird whitespace appearing whenever you have long equations.
 
 \subsection{Examples}
-Here are some examples of the what \texttt{dansMathsSetup} allows; take a look at the raw \LaTeX\ to see whether you think my shortcuts and environments might be useful to you.
+Here are some examples of what \texttt{dansMathsSetup} allows; take a look at the raw \LaTeX\ to see whether you think my shortcuts and environments might be useful to you.
 If not, hopefully a look at the command definitions should show that it is easy to define custom math mode commands that \textit{will} be of use.
 
 \noindent\rule{\textwidth}{0.4pt}
@@ -422,7 +426,7 @@ With this in mind, we make the following definitions:
 \end{definition}
 
 \begin{aside}
-    A Reynolds averaging operator, $\filter{\dots}_\text{R}$, is a special case of a linear filtering operator which satisfies also the following ``Reynolds condition'':
+    A Reynolds averaging operator, $\filter{\dots}_\text{R}$, is a special case of a linear filtering operator that satisfies also the following ``Reynolds conditions'':
     \begin{align}
         \filter{\varphi\filter{\psi}_\mathrm{R}}_\mathrm{R}
         &=
